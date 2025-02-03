@@ -2,91 +2,128 @@
 ---@license MIT
 
 return {
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+  "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
-	-- "gc" to comment visual regions/lines
-	{ "numToStr/Comment.nvim", opts = {} },
+  -- "gc" to comment visual regions/lines
+  { "numToStr/Comment.nvim", opts = {} },
 
-	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
-		"lewis6991/gitsigns.nvim",
-		opts = {},
-	},
+  { -- Adds git related signs to the gutter, as well as utilities for managing changes
+    "lewis6991/gitsigns.nvim",
+    opts = {},
+  },
 
-	{
-		-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-		"catppuccin/nvim",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
-		init = function()
-			-- Load the colorscheme here.
-			-- Like many other themes, this one has different styles, and you could load
-			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-			vim.cmd.colorscheme("catppuccin-mocha")
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
 
-			-- You can configure highlights by doing something like:
-			vim.cmd.hi("Comment gui=none")
-		end,
-	},
+  {
+    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    "catppuccin/nvim",
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    init = function()
+      -- Load the colorscheme here.
+      -- Like many other themes, this one has different styles, and you could load
+      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+      vim.cmd.colorscheme("catppuccin-mocha")
 
-	-- Highlight todo, notes, etc in comments
-	{
-		"folke/todo-comments.nvim",
-		event = "VimEnter",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = { signs = false },
-	},
+      -- You can configure highlights by doing something like:
+      vim.cmd.hi("Comment gui=none")
+    end,
+  },
 
-	{
-		"nvim-lualine/lualine.nvim",
-		opts = {
-			options = {
-				disabled_filetypes = { "NERDTree", "NvimTree_1" },
-			},
-		},
-	},
-	{ "vimwiki/vimwiki" },
-	{
-		"NvChad/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup()
-		end,
-	}, -- colorize hex colors
-	{
-		"f-person/git-blame.nvim",
-		config = function()
-			require("gitblame").setup({ enabled = true })
-		end,
-	},
-	{
-		"lambdalisue/suda.vim",
-	},
-	{ "windwp/nvim-ts-autotag" },
-	-- Lazy.nvim
-	{
-		"hiasr/vim-zellij-navigator.nvim",
-		config = function()
-			require("vim-zellij-navigator").setup()
-		end,
-	},
+  {
+    "sanathks/workspace.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("workspace").setup({
+        workspaces = {
+          { name = "TriBee 2", path = "~/zephyrproject/firmware/application", keymap = { "<leader>w" } },
+          { name = "Hobby",    path = "~/projects/hobby",                     keymap = { "<leader>p" } },
+        }
+      })
+    end,
+  },
 
-	{
-		"danymat/neogen",
-		config = function()
-			local neogen = require("neogen")
+  {
+    "neanias/everforest-nvim",
+    version = false,
+    lazy = false,
+    priority = 1000, -- make sure to load this before all the other start plugins
+    -- Optional; default configuration will be used if setup isn't called.
+    config = function()
+      require("everforest").setup({
+        -- Your config here
+      })
+      vim.cmd.colorscheme("everforest")
+    end,
+  },
 
-			neogen.setup({
-				snippet_engine = "luasnip",
-			})
+  -- Highlight todo, notes, etc in comments
+  {
+    "folke/todo-comments.nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false },
+  },
 
-			local opts = { noremap = true, silent = true }
-			vim.keymap.set("n", "<leader>nc", function()
-				neogen.generate({ snippet_engine = "luasnip" })
-			end, opts)
-		end,
-	},
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = {
+      options = {
+        disabled_filetypes = { "NERDTree", "NvimTree_1" },
+      },
+    },
+  },
+  { "vimwiki/vimwiki" },
+  {
+    "NvChad/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
+  }, -- colorize hex colors
+  {
+    "f-person/git-blame.nvim",
+    config = function()
+      require("gitblame").setup({ enabled = true })
+    end,
+  },
+  {
+    "lambdalisue/suda.vim",
+  },
+  { "windwp/nvim-ts-autotag" },
+  -- Lazy.nvim
+  {
+    "hiasr/vim-zellij-navigator.nvim",
+    config = function()
+      require("vim-zellij-navigator").setup()
+    end,
+  },
 
-	{
-		'mrcjkb/rustaceanvim',
-		version = '^5', -- Recommended
-		lazy = false, -- This plugin is already lazy
-	}
+  {
+    "danymat/neogen",
+    config = function()
+      local neogen = require("neogen")
+
+      neogen.setup({
+        snippet_engine = "luasnip",
+      })
+
+      local opts = { noremap = true, silent = true }
+      vim.keymap.set("n", "<leader>nc", function()
+        neogen.generate({ snippet_engine = "luasnip" })
+      end, opts)
+    end,
+  },
+
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false,   -- This plugin is already lazy
+  }
 }

@@ -1,3 +1,5 @@
+vim.g.mapleader = ","
+
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
@@ -34,5 +36,6 @@ vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "Open up nvim-tree", silent = true })
+
 
 -- vim.keymap.set("n", "<leader>ng", require("neogen").generate(o))

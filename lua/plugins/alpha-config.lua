@@ -133,6 +133,9 @@ return {
 			dashboard.section.buttons.val = {
 				dashboard.button("f", " " .. " Find file", ':Telescope find_files<Cr>'),
 				dashboard.button("c", " " .. " Config", ':cd ~/.config/nvim | edit .<CR>'),
+				dashboard.button("t", " " .. " TriBee 2",
+					':cd ~/zephyrproject/firmware/application | edit .<CR>'),
+				dashboard.button("h", " " .. " Algorithms", ':cd ~/linus/Algorithms | edit .<CR>'),
 				dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
 			}
 

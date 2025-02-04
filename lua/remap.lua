@@ -39,3 +39,7 @@ vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "Open up nvim-t
 
 
 -- vim.keymap.set("n", "<leader>ng", require("neogen").generate(o))
+--
+vim.keymap.set("n", "<C-Space>", ":ToggleTerm<CR>")
+vim.keymap.set("i", "<C-Space>", ":ToggleTerm<CR>")
+vim.keymap.set("t", "<C-Space>", "<C-\\><C-n>:ToggleTerm<CR>", { desc = "Toggle terminal" })

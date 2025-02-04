@@ -38,6 +38,10 @@ return {
   },
 
   {
+    "tpope/vim-fugitive"
+  },
+
+  {
     "sanathks/workspace.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
@@ -48,6 +52,13 @@ return {
         }
       })
     end,
+  },
+
+  {
+    -- amongst your other plugins
+    { 'akinsho/toggleterm.nvim', version = "*", config = true },
+    -- or
+    { 'akinsho/toggleterm.nvim', version = "*", opts = { --[[ things you want to change go here]] } }
   },
 
   {
